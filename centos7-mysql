@@ -1,0 +1,27 @@
+
+1. update yum
+    sudo yum update
+
+2. download and install
+    wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+    sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+    yum update
+
+    sudo yum install mysql-server
+    sudo systemctl start mysqld
+    systemctl enable mysqld
+
+3. configure
+    a: install default tables
+        sudo mysql_secure_installation
+
+    b: grand user privilege
+        grant all privileges on *.* to admin@'192.168.%.%' identified by '1';
+        flush privileges;
+
+        /etc/my.cnf:
+        innodb_file_per_table=1
+
+    c: firewall
+        firewall-cmd --zone=public --permanent --add-port=3306/tcp
+        systemctl restart firewalld
