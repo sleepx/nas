@@ -1,0 +1,5 @@
+yum install hdparm -y
+
+#set sleep mode 10min
+hdparm -S 120 /dev/sdb
+hdparm -S 120 /dev/sdc
